@@ -142,3 +142,86 @@ The `adminjs-cloud.json` file is configured to include:
 
 Make sure your `.env` files are up to date before deployment!
 
+---
+
+## Deployment to brojs.ru Platform
+
+### Prerequisites
+
+1. **Repository**: Ensure your repository is correctly configured
+   - Repository URL: `https://github.com/balamut-ark/TravelFrog.git`
+   - Default branch: `main` (not `master`)
+
+### Common Issues and Solutions
+
+#### Issue 1: Wrong Repository URL
+
+**Error**: Pipeline clones `budget-compass-mfe.git` instead of `TravelFrog.git`
+
+**Solution**: 
+1. Go to the brojs.ru admin panel
+2. Check your project configuration
+3. Update the repository URL to: `https://github.com/balamut-ark/TravelFrog.git`
+4. Ensure the repository is set to the correct project
+
+#### Issue 2: Branch Not Found
+
+**Error**: `error: pathspec 'master' did not match any file(s) known to git`
+
+**Solution**:
+1. Go to the brojs.ru admin panel
+2. Update the branch name from `master` to `main`
+3. The repository uses `main` as the default branch
+
+#### Issue 3: Pipeline Script Issues
+
+The brojs.ru platform uses custom Jenkins scripts. If you encounter issues:
+
+1. **Check Admin Panel Settings**:
+   - Verify repository URL: `https://github.com/balamut-ark/TravelFrog.git`
+   - Verify branch: `main`
+   - Check if there are any custom script configurations
+
+2. **Repository Structure**:
+   - Ensure your repository has both `backend/` and `frontend/` directories
+   - Ensure `package.json` files exist in both directories
+
+3. **Jenkinsfile**:
+   - A `Jenkinsfile` has been created in the root directory
+   - This may be used if the platform supports custom Jenkinsfiles
+   - The file specifies the correct repository and branch
+
+### Step-by-Step brojs.ru Deployment
+
+1. **Configure Repository in Admin Panel**:
+   - Repository URL: `https://github.com/balamut-ark/TravelFrog.git`
+   - Branch: `main`
+   - Make sure all settings are saved
+
+2. **Verify Project Structure**:
+   ```
+   TravelFrog/
+   ├── backend/
+   │   ├── package.json
+   │   └── src/
+   ├── frontend/
+   │   ├── package.json
+   │   └── src/
+   └── Jenkinsfile (optional)
+   ```
+
+3. **Trigger Deployment**:
+   - Use the "Deploy" or "Build" button in the admin panel
+   - Monitor the build logs for any errors
+
+4. **Check Build Logs**:
+   - If you see `error: pathspec 'master' did not match`, update branch to `main`
+   - If you see wrong repository being cloned, update repository URL
+
+### Troubleshooting brojs.ru Deployment
+
+- **Build fails during checkout**: Check repository URL and branch name in admin panel
+- **Wrong files being deployed**: Verify repository configuration points to TravelFrog
+- **Missing dependencies**: Ensure both backend and frontend have valid `package.json` files
+- **Build errors**: Check that all required environment variables are set in the admin panel
+
