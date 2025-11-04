@@ -173,7 +173,17 @@ Make sure your `.env` files are up to date before deployment!
 2. Update the branch name from `master` to `main`
 3. The repository uses `main` as the default branch
 
-#### Issue 3: Pipeline Script Issues
+#### Issue 3: Missing build:prod Script
+
+**Error**: `npm error Missing script: "build:prod"`
+
+**Solution**:
+- A root `package.json` has been created with the required `build:prod` script
+- This script builds both backend and frontend in sequence
+- The `postinstall` script automatically installs dependencies in both directories
+- Make sure this `package.json` is committed to your repository
+
+#### Issue 4: Pipeline Script Issues
 
 The brojs.ru platform uses custom Jenkins scripts. If you encounter issues:
 
@@ -201,6 +211,7 @@ The brojs.ru platform uses custom Jenkins scripts. If you encounter issues:
 2. **Verify Project Structure**:
    ```
    TravelFrog/
+   ├── package.json (REQUIRED - contains build:prod script)
    ├── backend/
    │   ├── package.json
    │   └── src/
